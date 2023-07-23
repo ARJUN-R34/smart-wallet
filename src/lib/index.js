@@ -15,7 +15,6 @@ function createSignerKeypair() {
         privateKey: signer.privateKey
     }
 
-    console.log('Signer Keys : ', response);
     return response;
 }
 
@@ -34,7 +33,6 @@ async function getSmartWalletAddress(privateKey, publicAddress) {
 
     const smartAccountAddress = await smartAccount.getSmartAccountAddress(publicAddress);
 
-    console.log('Smart Account Address : ', smartAccountAddress);
     return { smartAccount, smartAccountAddress };
 }
 
@@ -66,10 +64,10 @@ async function updateCounter(smartAccount) {
             chainId: ChainId.POLYGON_MUMBAI
         });
 
-        console.log('Transaction Response : ', response);
         return response;
     } catch (error) {
         console.log(error);
+        return error;
     }
 }
 
@@ -81,8 +79,7 @@ async function getCounterValue(privateKey) {
     const counterContract = new ethers.Contract(Constants.CounterContractAddress, Constants.CounterABI, walletProvider);
     const count = await counterContract.count();
 
-    console.log('Counter Value : ', count.toString());
-    return count.toString();
+    return count;
 }
 
 // Get the MATIC balance of the smart wallet
@@ -92,12 +89,11 @@ async function GetMATICBalance(privateKey, smartWalletAddress) {
 
     const balance = await walletProvider.getBalance(smartWalletAddress);
 
-    console.log('Smart Wallet Balance : ', ethers.utils.formatEther(balance));
     return ethers.utils.formatEther(balance);
 }
 
 // Get the WETH balance of the smart wallet
-async function refreshWMATICBalance(privateKey, smartWalletAddress) {
+async function getWMATICBalance(privateKey, smartWalletAddress) {
     const provider = new HDWalletProvider(privateKey.slice(2), Constants.RPC);
     const walletProvider = new ethers.providers.Web3Provider(provider);
 
@@ -105,7 +101,6 @@ async function refreshWMATICBalance(privateKey, smartWalletAddress) {
 
     const balance = await contract.balanceOf(smartWalletAddress);
 
-    console.log('WMATIC Balance : ', ethers.utils.formatEther(balance));
     return ethers.utils.formatEther(balance);
 }
 
@@ -115,5 +110,5 @@ module.exports = {
     updateCounter,
     getCounterValue,
     GetMATICBalance,
-    refreshWMATICBalance,
+    getWMATICBalance,
 };
