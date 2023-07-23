@@ -37,7 +37,7 @@ async function getSmartWalletAddress(privateKey, publicAddress) {
 }
 
 // Execute a smart contract function that increments a counter. Also deploys the smart wallet along with it
-// Transfer some WETH (polygon mumbai) to the smart wallet before executing this function
+// Transfer some WMATIC (polygon mumbai) to the smart wallet before executing this function
 async function updateCounter(smartAccount) {
     try {
         let iface = new ethers.utils.Interface(Constants.CounterABI);
@@ -92,7 +92,7 @@ async function GetMATICBalance(privateKey, smartWalletAddress) {
     return ethers.utils.formatEther(balance);
 }
 
-// Get the WETH balance of the smart wallet
+// Get the WMATIC balance of the smart wallet
 async function getWMATICBalance(privateKey, smartWalletAddress) {
     const provider = new HDWalletProvider(privateKey.slice(2), Constants.RPC);
     const walletProvider = new ethers.providers.Web3Provider(provider);
