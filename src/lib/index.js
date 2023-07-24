@@ -64,6 +64,7 @@ async function updateCounter(smartAccount) {
             chainId: ChainId.POLYGON_MUMBAI
         });
 
+        console.log('Update Counter Tx Response : ', response);
         return response;
     } catch (error) {
         console.log(error);
@@ -104,6 +105,58 @@ async function getWMATICBalance(privateKey, smartWalletAddress) {
     return ethers.utils.formatEther(balance);
 }
 
+// Perform a batch transaction
+// Need to ensure sufficient USDC balance in the smart wallet before executing this function
+async function sendBatchERC20Transaction({ smartAccount, address1, amount1, address2, amount2 }) {
+    let txns = [];
+
+    let erc20Interface = new ethers.utils.Interface(Constants.ERC20ABI);
+
+    const transfer1Data = erc20Interface.encodeFunctionData(
+        "transfer",
+        [address1, amount1]
+    );
+
+    const transfer2Data = erc20Interface.encodeFunctionData(
+        "transfer",
+        [address2, amount2]
+    );
+
+    const transfer1Tx = {
+        to: Constants.WMATICAddress,
+        value: '0x0',
+        data: transfer1Data,
+    };
+
+    const transfer2Tx = {
+        to: Constants.WMATICAddress,
+        value: '0x0',
+        data: transfer2Data,
+    };
+
+    txns.push(transfer1Tx);
+    txns.push(transfer2Tx);
+
+    // Get fee quotes
+    const feeQuotes = await smartAccount.getFeeQuotesForBatch({ transactions: txns });
+
+    // Create transaction
+    const transaction = await smartAccount.createUserPaidTransactionBatch({
+        transactions: txns,
+        feeQuote: {
+            address: Constants.USDCAddress,
+            decimal: Constants.USDCDecimal,
+            symbol: Constants.USDCSymbol,
+            tokenGasPrice: 10,
+        },
+    });
+
+    const response = await smartAccount.sendUserPaidTransaction({ tx: transaction });
+
+    console.log('Batch Tx Response : ', response);
+    return response;
+}
+
 module.exports = {
     createSignerKeypair,
     getSmartWalletAddress,
@@ -111,4 +164,5 @@ module.exports = {
     getCounterValue,
     GetMATICBalance,
     getWMATICBalance,
+    sendBatchERC20Transaction,
 };
