@@ -62,3 +62,29 @@ describe('Execute Smart Contract by paying gas fees in WMATIC', async () => {
         }, 10000);
     });
 });
+
+describe('Execute Batch Transaction and pay gas fees in WMATIC', async () => {
+    it('Should ensure that MATIC balance is 0', async () => {
+        const balance = await Library.GetMATICBalance(Constants.PRIVATE_KEY, Constants.SMART_WALLET_ADDRESS);
+
+        expect(parseFloat(balance)).to.equal(0);
+    });
+
+    it('Should ensure that WMATIC balance is more than 0', async () => {
+        const balance = await Library.getWMATICBalance(Constants.PRIVATE_KEY, Constants.SMART_WALLET_ADDRESS);
+
+        expect(parseFloat(balance)).to.be.greaterThan(0);
+    });
+
+    it('Should perform a batch transaction', async () => {
+        const response = await Library.sendBatchERC20Transaction({ 
+            smartAccount,
+            address1: Constants.BATCH_TX_RECIPIENT_1,
+            amount1: Constants.BATCH_TX_AMOUNT_1,
+            address2: Constants.BATCH_TX_RECIPIENT_2,
+            amount2: Constants.BATCH_TX_AMOUNT_2,
+        });
+
+        expect(response).to.be.an('string').and.satisfy(msg => msg.startsWith('0x'));
+    });
+});
