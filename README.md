@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# EIP 4337 Smart Wallet PoC
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A wallet loaded with dankness from the depths of the web3 space. Normies choose to call it Smart Wallet a.k.a. ERC 4337 wallet. Powered by Biconomy.
 
-## Available Scripts
 
-In the project directory, you can run:
+Dank Wallet
+===
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Beginners Guide
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+ERC-4337 is a standard that aims to solve the UX problems with traditional wallets without any modification to the protocol/consensus layer.
 
-### `npm test`
+Traditional wallets are generated using the ECDSA (Elliptic Curve Digital Signature Algorithm) to generate a public & private key pair and the public address is derived from the public key. These wallets can only sign and broadcast a transaction to the chain and cannot perform smart contract-like functionalities.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Account Abstraction as it is popularly known, is a way of bringing contract-like functionality to EOAs (Externally Owned Accounts) without having to manage an EOA and Smart Contract separately.
 
-### `npm run build`
+If you are new to EIP 4337, [this is a good start!](https://medium.com/@itsarjn/whatthefork-eip4337-e4c4ed0e1d35)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Run the PoC
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To run the PoC on your local machine,
 
-### `npm run eject`
+1. Clone this repo and go the directory using ```git clone https://github.com/ARJUN-R34/smart-wallet && cd smart-wallet``` 
+2. Enter the run command using ```npm run start```
+3. Visit `http://localhost:3000` to interact with the FE.
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Run Test
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To run the test cases,
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Follow step 1 from the previous section.
+2. Run the tests using ```npm run test```
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+>
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+> **Warning**
+> This is just a PoC and the code is not intended to be used on production systems.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+> **Note**
+> This repo will be updated continuously and would appreciate any feedback or discussions around smart wallets. PRs are also welcome ❤️
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+###### tags: `Blockchain` `Smart Wallets` `EVM` `EIP-4337` `Ethereum`
